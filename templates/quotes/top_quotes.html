@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block title %}Топ цитат{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4"><i class="fas fa-trophy"></i> Топ цитат</h2>
+
+        <ul class="nav nav-tabs mb-4" id="topTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="rating-tab" data-bs-toggle="tab" data-bs-target="#rating" type="button">
+                    <i class="fas fa-star"></i> По рейтингу
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="likes-tab" data-bs-toggle="tab" data-bs-target="#likes" type="button">
+                    <i class="fas fa-thumbs-up"></i> По лайкам
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="views-tab" data-bs-toggle="tab" data-bs-target="#views" type="button">
+                    <i class="fas fa-eye"></i> По просмотрам
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="weight-tab" data-bs-toggle="tab" data-bs-target="#weight" type="button">
+                    <i class="fas fa-weight-hanging"></i> По весу
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="topTabsContent">
+            <!-- По рейтингу -->
+            <div class="tab-pane fade show active" id="rating">
+                <div class="row">
+                    {% for quote in top_by_rating %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <p class="card-text">"{{ quote.text }}"</p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        {{ quote.source.get_type_display }} "{{ quote.source.title }}"
+                                        {% if quote.source.year %}({{ quote.source.year }}){% endif %}
+                                    </small>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">
+                                    👍 {{ quote.likes }} | 👎 {{ quote.dislikes }} |
+                                    ⭐ {{ quote.rating_value }} | 👁️ {{ quote.views_count }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12">
+                        <p class="text-muted">Нет данных</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- По лайкам -->
+            <div class="tab-pane fade" id="likes">
+                <div class="row">
+                    {% for quote in top_by_likes %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <p class="card-text">"{{ quote.text }}"</p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        {{ quote.source.get_type_display }} "{{ quote.source.title }}"
+                                        {% if quote.source.year %}({{ quote.source.year }}){% endif %}
+                                    </small>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">
+                                    👍 {{ quote.likes }} | 👎 {{ quote.dislikes }} |
+                                    ⭐ {{ quote.rating_value }} | 👁️ {{ quote.views_count }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12">
+                        <p class="text-muted">Нет данных</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- По просмотрам -->
+            <div class="tab-pane fade" id="views">
+                <div class="row">
+                    {% for quote in top_by_views %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <p class="card-text">"{{ quote.text }}"</p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        {{ quote.source.get_type_display }} "{{ quote.source.title }}"
+                                        {% if quote.source.year %}({{ quote.source.year }}){% endif %}
+                                    </small>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">
+                                    👍 {{ quote.likes }} | 👎 {{ quote.dislikes }} |
+                                    ⭐ {{ quote.rating_value }} | 👁️ {{ quote.views_count }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12">
+                        <p class="text-muted">Нет данных</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- По весу -->
+            <div class="tab-pane fade" id="weight">
+                <div class="row">
+                    {% for quote in top_by_weight %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <p class="card-text">"{{ quote.text }}"</p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        {{ quote.source.get_type_display }} "{{ quote.source.title }}"
+                                        {% if quote.source.year %}({{ quote.source.year }}){% endif %}
+                                    </small>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">
+                                    ⚖️ {{ quote.weight }} | 👍 {{ quote.likes }} |
+                                    👎 {{ quote.dislikes }} | 👁️ {{ quote.views_count }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12">
+                        <p class="text-muted">Нет данных</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    
+        </div>
+    </div>
+</div>
+{% endblock %}

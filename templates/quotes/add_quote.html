@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавить цитату{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0"><i class="fas fa-plus-circle"></i> Добавить новую цитату</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label class="form-label">Текст цитаты</label>
+                        {{ form.text }}
+                        {% if form.text.errors %}
+                            <div class="text-danger">{{ form.text.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Источник</label>
+                        {{ form.source }}
+                        {% if form.source.errors %}
+                            <div class="text-danger">{{ form.source.errors }}</div>
+                        {% endif %}
+                        <div class="form-text">
+                            Нет нужного источника? <a href="{% url 'add_source' %}">Добавить новый</a>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Вес цитаты</label>
+                        {{ form.weight }}
+                        {% if form.weight.errors %}
+                            <div class="text-danger">{{ form.weight.errors }}</div>
+                        {% endif %}
+                        <div class="form-text">
+                            Чем выше вес, тем чаще цитата будет показываться (1-10)
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Сохранить цитату
+                        </button>
+                        <a href="{% url 'random_quote' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Назад
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
